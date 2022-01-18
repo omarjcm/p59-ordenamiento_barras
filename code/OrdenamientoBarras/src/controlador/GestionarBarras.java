@@ -29,7 +29,7 @@ public class GestionarBarras extends JPanel {
         this.generarBarrasAleatorias();
     }
     
-    private void generarBarrasAleatorias() {
+    public void generarBarrasAleatorias() {
         generarColoresAleatorios();
         generarAltoBarrasAleatorios();
         cargarBarras();

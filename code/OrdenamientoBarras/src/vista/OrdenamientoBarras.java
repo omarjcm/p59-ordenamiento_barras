@@ -6,8 +6,10 @@ package vista;
 
 import controlador.Constante;
 import controlador.GestionarBarras;
+import controlador.IniciarListener;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
@@ -68,6 +70,9 @@ public class OrdenamientoBarras extends JFrame {
         this.getContentPane().add(this.controlarBarras, cons);
         
         this.pack();
+        
+        ActionListener iniciarLstnr = new IniciarListener(this.controlarBarras);
+        this.iniciarBtn.addActionListener( iniciarLstnr );
         
         this.setSize( Constante.ANCHO, Constante.ALTO );
         this.addWindowListener( new VentanaMonitor() );
