@@ -70,7 +70,7 @@ public class GestionarBarras extends JPanel {
         }
     }
     
-    public void cargarBarras(Graphics g) {
+    private void pintarBarras(Graphics g) {
         for (Barra barra : this.barras) {
             g.fillRect(barra.getPosicion().x, barra.getPosicion().y, barra.getAncho(), barra.getAlto());
             g.setColor( barra.getColor() );
@@ -82,6 +82,16 @@ public class GestionarBarras extends JPanel {
         super.paintComponent(g);
         this.setBackground( Color.LIGHT_GRAY );
         
-        cargarBarras(g);
+        pintarBarras(g);
     }
+
+    public LinkedList<Barra> getBarras() {
+        return barras;
+    }
+
+    public void setBarras(LinkedList<Barra> barras) {
+        this.barras = barras;
+    }
+    
+    
 }

@@ -24,6 +24,13 @@ public class Barra {
         this.alto = alto;
         this.color = color;
     }
+    
+    public Barra(Barra barra) {
+        this.posicion = barra.getPosicion();
+        this.ancho = barra.getAncho();
+        this.alto = barra.getAlto();
+        this.color = barra.getColor();
+    }
 
     public int getAncho() {
         return ancho;
