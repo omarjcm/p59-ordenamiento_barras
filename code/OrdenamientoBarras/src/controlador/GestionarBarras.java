@@ -5,6 +5,7 @@
 package controlador;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Point;
 import java.util.LinkedList;
 import javax.swing.JPanel;
@@ -23,8 +24,9 @@ public class GestionarBarras extends JPanel {
     
     public GestionarBarras() {
         super();
+        
         this.barras = new LinkedList<Barra>();
-        generarBarrasAleatorias();
+        this.generarBarrasAleatorias();
     }
     
     private void generarBarrasAleatorias() {
@@ -58,10 +60,28 @@ public class GestionarBarras extends JPanel {
         this.barras = new LinkedList<Barra>();
         
         int anchoBarra = Constante.ANCHO / Constante.NUM_BARRAS;
+        int x = 5;
+        //int y = 60;
         for (int i=0; i<Constante.NUM_BARRAS; i++) {
-            int y = 5;
-            Point punto = new Point();
-            //this.barras.add( new Barra() );
+            int y = 60 + Constante.ALTO_BARRA - this.altoBarras[i];
+            Point posicion = new Point(x, y);
+            this.barras.add( new Barra( posicion, anchoBarra, this.altoBarras[i], this.coloresBarras[i] ) );
+            x = x + anchoBarra;
         }
+    }
+    
+    public void cargarBarras(Graphics g) {
+        for (Barra barra : this.barras) {
+            g.fillRect(barra.getPosicion().x, barra.getPosicion().y, barra.getAncho(), barra.getAlto());
+            g.setColor( barra.getColor() );
+        }
+    }
+    
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        this.setBackground( Color.LIGHT_GRAY );
+        
+        cargarBarras(g);
     }
 }
