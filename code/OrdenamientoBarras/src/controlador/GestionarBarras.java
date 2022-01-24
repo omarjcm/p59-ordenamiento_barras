@@ -8,6 +8,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 import modelo.Barra;
 
@@ -21,6 +23,9 @@ public class GestionarBarras extends JPanel {
     private Color[] coloresBarras;
     private int[] altoBarras;
     private int[] anchoBarras;
+    
+    private Thread hilo;
+    private OrdenamientoBurbuja ejecutar;
     
     public GestionarBarras() {
         super();
@@ -93,5 +98,23 @@ public class GestionarBarras extends JPanel {
         this.barras = barras;
     }
     
+    public void ordenar() {
+        this.ejecutar = new OrdenamientoBurbuja(this);
+        this.hilo = new Thread( this.ejecutar );
+        this.hilo.start();
+    }
     
+    public void pausar() {
+        if (this.hilo != null) {
+            this.hilo.stop();
+        }
+    }
+
+    void aumentarVelocidad() {
+        this.ejecutar.setVelocidad( this.ejecutar.getVelocidad() - 10 );
+    }
+    
+    void disminuirVelocidad() {
+        this.ejecutar.setVelocidad( this.ejecutar.getVelocidad() + 10 );
+    }
 }

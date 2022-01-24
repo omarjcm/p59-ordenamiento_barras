@@ -7,6 +7,10 @@ package vista;
 import controlador.Constante;
 import controlador.GestionarBarras;
 import controlador.IniciarListener;
+import controlador.MasListener;
+import controlador.MenosListener;
+import controlador.OrdenarListener;
+import controlador.PausarListener;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
@@ -24,6 +28,9 @@ public class OrdenamientoBarras extends JFrame {
     private JButton iniciarBtn;
     private JButton ordenarBtn;
     private JButton pausarBtn;
+    
+    private JButton masBtn;
+    private JButton menosBtn;
     
     public OrdenamientoBarras() {
         super();
@@ -57,12 +64,28 @@ public class OrdenamientoBarras extends JFrame {
         cons.gridheight = 1;
         cons.weightx = 1.0;
         this.getContentPane().add( this.pausarBtn, cons );
+
+        this.masBtn = new JButton("+");
+        cons.gridx = 3;
+        cons.gridy = 0;
+        cons.gridwidth = 1;
+        cons.gridheight = 1;
+        cons.weightx = 0.1;
+        this.getContentPane().add( this.masBtn, cons );
+        
+        this.menosBtn = new JButton("-");
+        cons.gridx = 4;
+        cons.gridy = 0;
+        cons.gridwidth = 1;
+        cons.gridheight = 1;
+        cons.weightx = 0.1;
+        this.getContentPane().add( this.menosBtn, cons );
         
         this.controlarBarras = new GestionarBarras();
         cons.gridx = 0;
         cons.gridy = 1;
-        cons.gridwidth = 3;
-        cons.gridheight = 3;
+        cons.gridwidth = 5;
+        cons.gridheight = 4;
         cons.weightx = 1.0;
         cons.weighty = 1.0;
         cons.fill = GridBagConstraints.BOTH;
@@ -73,6 +96,18 @@ public class OrdenamientoBarras extends JFrame {
         
         ActionListener iniciarLstnr = new IniciarListener(this.controlarBarras);
         this.iniciarBtn.addActionListener( iniciarLstnr );
+        
+        ActionListener ordenarLstnr = new OrdenarListener(this.controlarBarras);
+        this.ordenarBtn.addActionListener( ordenarLstnr );
+        
+        ActionListener pausarLstnr = new PausarListener(this.controlarBarras);
+        this.pausarBtn.addActionListener( pausarLstnr );
+        
+        ActionListener masListener = new MasListener(this.controlarBarras);
+        this.masBtn.addActionListener(masListener);
+        
+        ActionListener menosListener = new MenosListener(this.controlarBarras);
+        this.menosBtn.addActionListener(menosListener);
         
         this.setSize( Constante.ANCHO, Constante.ALTO );
         this.addWindowListener( new VentanaMonitor() );
